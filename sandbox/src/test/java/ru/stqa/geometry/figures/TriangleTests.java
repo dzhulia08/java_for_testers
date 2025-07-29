@@ -19,4 +19,52 @@ public class TriangleTests {
         Assertions.assertEquals(12.0, result);
     }
 
+    @Test
+    void cannotCreateTriangleWithNegativeSide(){
+        try{
+            new Triangle(-5.0, 3.0, 4.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+
+        try{
+            new Triangle(5.0, -3.0, 4.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+
+        try{
+            new Triangle(5.0, 3.0, -4.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+    }
+
+    @Test
+    void cannotCreateTriangleWithIncorrectSumOfTwoSide(){
+        try{
+            new Triangle(1.0, 2.0, 4.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+
+        try{
+            new Triangle(1.0, 4.0, 2.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+
+        try{
+            new Triangle(4.0, 1.0, 2.0);
+            Assertions.fail();
+        } catch(IllegalArgumentException exception){
+            // ОК
+        }
+    }
+
 }
