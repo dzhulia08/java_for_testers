@@ -7,11 +7,10 @@ public class GroupRemovalTests extends TestBase {
 
     @Test
     public void canRemoveGroup() {
-        TestBase.app.openGroupsPage();
-        if (!TestBase.app.isGroupPresent()){
-            TestBase.app.createGroup(new GroupData("group name 1", "group header", "group footer"));
+        if (!app.groups().isGroupPresent()){
+            app.groups().createGroup(new GroupData("group name 1", "group header", "group footer"));
         }
-        TestBase.removeGroup();
+        app.groups().removeGroup();
     }
 
 }
