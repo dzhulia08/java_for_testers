@@ -26,4 +26,25 @@ public class TestBase {
         return result;
     }
 
+    public static String randomPhone() {
+        var result = "";
+        for (int i = 0; i < 9; i++) {
+            int rnd = (int) (Math.random() * 10);
+            String rndStr = String.valueOf(rnd);
+            result = result + rndStr;
+        }
+        result = "89" + result;
+        return result;
+    }
+
+    public static String randomEmail(int n) {
+        var rnd = new Random();
+        var result = "";
+        for (int i = 0; i < n+1; i++) {
+            result = result + (char)('a' + rnd.nextInt(26));
+        }
+        result = result + "@" + result + ".ru" ;
+        return result;
+    }
+
 }
