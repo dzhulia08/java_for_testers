@@ -40,6 +40,23 @@ public class ContactHelper extends HelperBase {
 //        closeAlertAfterRemoveContact();
     }
 
+    public void modifyContact(ContactData contact, ContactData modifiedContact) {
+        openContactsPage();
+        selectContact(contact);
+        initContactModification();
+        fillContactForm(modifiedContact);
+        submitContactModification();
+        returnToContactPage();
+    }
+
+    private void initContactModification() {
+        click(By.xpath("//a/img[@title='Edit']"));
+    }
+
+    private void submitContactModification() {
+        click(By.name("update"));
+    }
+
     private void closeAlertAfterRemoveContact() {
         closeAlert();
     }
