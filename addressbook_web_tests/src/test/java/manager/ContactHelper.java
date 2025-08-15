@@ -106,8 +106,11 @@ public class ContactHelper extends HelperBase {
         var contracts = new ArrayList<ContactData>();
         var checkboxes = manager.driver.findElements(By.xpath("//td[@class='center']/input"));
         for (var checkbox : checkboxes) {
+            String firstName = manager.driver.findElements(By.xpath("/parent::td/following::td[1]")).toString();
+            String lastName = manager.driver.findElements(By.xpath("/parent::td/following::td[2]")).toString();
+            String address = manager.driver.findElements(By.xpath("/parent::td/following::td[3]")).toString();
             var id = checkbox.getAttribute("value");
-            contracts.add(new ContactData().withId(id));
+            contracts.add(new ContactData().withId(id).withName(firstName, lastName).withAddress(address));
         }
         return contracts;
     }
