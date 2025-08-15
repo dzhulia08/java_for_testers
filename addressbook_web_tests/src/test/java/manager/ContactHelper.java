@@ -74,7 +74,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void returnToContactPage() {
-        click(By.linkText("home page"));
+        click(By.linkText("home"));
     }
 
     private void fillContactForm(ContactData contact) {
@@ -88,6 +88,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contact.email1());
         type(By.name("email2"), contact.email2());
         type(By.name("email3"), contact.email3());
+        attach(By.name("photo"), contact.photo());
     }
 
     private void selectContact(ContactData contact) {
