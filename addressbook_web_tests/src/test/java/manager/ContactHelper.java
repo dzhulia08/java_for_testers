@@ -42,15 +42,15 @@ public class ContactHelper extends HelperBase {
 
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
         openContactsPage();
-        selectContact(contact);
-        initContactModification();
+//        selectContact(contact);
+        initContactModification(contact);
         fillContactForm(modifiedContact);
         submitContactModification();
         returnToContactPage();
     }
 
-    private void initContactModification() {
-        click(By.xpath("//a/img[@title='Edit']"));
+    private void initContactModification(ContactData contact) {
+        click(By.xpath(String.format("//a[contains(@href, \"edit.php?id=%s\")]", contact.id())));
     }
 
     private void submitContactModification() {
