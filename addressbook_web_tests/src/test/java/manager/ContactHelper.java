@@ -104,13 +104,21 @@ public class ContactHelper extends HelperBase {
     public List<ContactData> getList() {
         openContactsPage();
         var contracts = new ArrayList<ContactData>();
-        var checkboxes = manager.driver.findElements(By.xpath("//td[@class='center']/input"));
-        for (var checkbox : checkboxes) {
-            String firstName = manager.driver.findElements(By.xpath("/parent::td/following::td[1]")).toString();
-            String lastName = manager.driver.findElements(By.xpath("/parent::td/following::td[2]")).toString();
-            String address = manager.driver.findElements(By.xpath("/parent::td/following::td[3]")).toString();
-            var id = checkbox.getAttribute("value");
-            contracts.add(new ContactData().withId(id).withName(firstName, lastName).withAddress(address));
+//        var checkboxes = manager.driver.findElements(By.xpath("//td[@class='center']/input"));
+//        for (var checkbox : checkboxes) {
+//            String firstName = manager.driver.findElements(By.xpath("/parent::td/following::td[1]")).toString();
+//            String lastName = manager.driver.findElements(By.xpath("/parent::td/following::td[2]")).toString();
+//            String address = manager.driver.findElements(By.xpath("/parent::td/following::td[3]")).toString();
+//            var id = checkbox.getAttribute("value");
+//            contracts.add(new ContactData().withId(id).withName(firstName, lastName).withAddress(address));
+//        }
+        var rows = manager.driver.findElements(By.xpath("//tr[@name='entry']"));
+        for (var row : rows) {
+            var input = row.findElement(By.name("selected[]"));
+            var id = input.getAttribute("value");
+            var lastName = row.findElement(By.xpath(String.format("//input[@value='%s']//parent::td/following::td[1]", id))).getText();
+            var firstName = row.findElement(By.xpath(String.format("//input[@value='%s']//parent::td/following::td[2]", id))).getText();
+            contracts.add(new ContactData().withId(id).withName(firstName, lastName));
         }
         return contracts;
     }

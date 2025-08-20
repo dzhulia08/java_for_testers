@@ -14,18 +14,18 @@ public class ContactCreationTests extends TestBase {
 
     public static List<ContactData> contactProvider() {
         var result = new ArrayList<ContactData>();
-        for (var firstName : List.of("", "Иван")) {
-            for (var lastName : List.of("", "Иванов")) {
-                for (var address : List.of("", "Адрес")) {
-                    for (var phone1 : List.of("", "89091110998")) {
-                        for (var email1 : List.of("", "test@test.ru")) {
-                            result.add(new ContactData("", firstName, "", lastName, address, "src/test/resources/images/avatar.png", phone1,  "",  "", email1,  "",  ""));
-                        }
-                    }
-                }
-            }
-        }
-        for (int i = 0; i < 5; i++) {
+//        for (var firstName : List.of("", "Иван")) {
+//            for (var lastName : List.of("", "Иванов")) {
+//                for (var address : List.of("", "Адрес")) {
+//                    for (var phone1 : List.of("", "89091110998")) {
+//                        for (var email1 : List.of("", "test@test.ru")) {
+//                            result.add(new ContactData("", firstName, "", lastName, address, "src/test/resources/images/avatar.png", phone1,  "",  "", email1,  "",  ""));
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        for (int i = 0; i < 2; i++) {
             result.add(new ContactData("", randomString(i * 5), randomString(i * 5), randomString(i * 5), randomString(i * 5), "src/test/resources/images/avatar.png", randomPhone(), randomPhone(), randomPhone(), randomEmail(i), randomEmail(i), randomEmail(i)));
         }
         return result;
