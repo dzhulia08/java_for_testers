@@ -1,0 +1,40 @@
+[ {
+  "id" : "",
+  "firstName" : "",
+  "middleName" : "",
+  "lastName" : "",
+  "address" : "",
+  "photo" : "src/test/resources/images/avatar.png",
+  "phone1" : "89085095761",
+  "phone2" : "89583328609",
+  "phone3" : "89345415768",
+  "email1" : "u@u.ru",
+  "email2" : "k@k.ru",
+  "email3" : "e@e.ru"
+}, {
+  "id" : "",
+  "firstName" : "cbfac",
+  "middleName" : "gatgt",
+  "lastName" : "jhqps",
+  "address" : "bcdrl",
+  "photo" : "src/test/resources/images/avatar.png",
+  "phone1" : "89768577248",
+  "phone2" : "89962864127",
+  "phone3" : "89137476642",
+  "email1" : "sg@sg.ru",
+  "email2" : "rv@rv.ru",
+  "email3" : "nd@nd.ru"
+}, {
+  "id" : "",
+  "firstName" : "njkitczmhg",
+  "middleName" : "jpwaflbjqg",
+  "lastName" : "lghoknuagm",
+  "address" : "wrgrjklogt",
+  "photo" : "src/test/resources/images/avatar.png",
+  "phone1" : "89063789607",
+  "phone2" : "89372029295",
+  "phone3" : "89690471089",
+  "email1" : "ixf@ixf.ru",
+  "email2" : "quy@quy.ru",
+  "email3" : "tvl@tvl.ru"
+} ]
