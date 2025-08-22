@@ -44,6 +44,12 @@ public class GroupCreationTests extends TestBase {
         ObjectMapper mapper = new ObjectMapper();
         var value = mapper.readValue(json, new TypeReference<List<GroupData>>() {});
         result.addAll(value);
+
+//        XML:
+//        var mapper = new XmlMapper();
+//        var value = mapper.readValue(new File("groups.xml"), new TypeReference<List<GroupData>>() {});
+//        result.addAll(value);
+
         return result;
     }
 
