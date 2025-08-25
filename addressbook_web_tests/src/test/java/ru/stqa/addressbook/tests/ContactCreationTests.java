@@ -44,30 +44,41 @@ public class ContactCreationTests extends TestBase {
         return result;
     }
 
+    public static List<ContactData> singleRandomContact() {
+        return List.of(new ContactData("", CommonFunctions.randomString(8),
+                CommonFunctions.randomString(10), CommonFunctions.randomString(4),
+                CommonFunctions.randomString(5), "src/test/resources/images/avatar.png",
+                CommonFunctions.randomPhone(), CommonFunctions.randomPhone(),
+                CommonFunctions.randomPhone(), CommonFunctions.randomEmail(5),
+                CommonFunctions.randomEmail(6), CommonFunctions.randomEmail(7)));
+    }
+
     @ParameterizedTest
-    @MethodSource("contactProvider")
-    public void canCreateMultipleContacts(ContactData contact) {
-        var oldContracts = app.contacts().getList();
+    @MethodSource("singleRandomContact")
+    public void canCreateContact(ContactData contact) {
+        var oldContacts = app.hbm().getContactList();
         app.contacts().createContact(contact);
-        var newContracts = app.contacts().getList();
+        var newContacts = app.hbm().getContactList();
         Comparator<ContactData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
-        newContracts.sort(compareById);
+        newContacts.sort(compareById);
 
-        var expectedList = new ArrayList<>(oldContracts);
-        expectedList.add(contact.withId(newContracts.get(newContracts.size()-1).id()).withName("", "").withMiddleName("").withAddress("").withPhoto("").withPhones("", "", "").withEmail("", "", ""));
+        var maxId = newContacts.get(newContacts.size()-1).id();
+        var expectedList = new ArrayList<>(oldContacts);
+//        expectedList.add(contact.withId(maxId).withName("", "").withMiddleName("").withAddress("").withPhoto("").withPhones("", "", "").withEmail("", "", ""));
+        expectedList.add(contact.withId(maxId));
         expectedList.sort(compareById);
 
-        Assertions.assertEquals(newContracts, expectedList);
+        Assertions.assertEquals(newContacts, expectedList);
     }
 
-    @Test
-    public void canCreateContact() {
-        var contact = new ContactData()
-                .withName(CommonFunctions.randomString(10), CommonFunctions.randomString(10))
-                .withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
-        app.contacts().createContact(contact);
-    }
+//    @Test
+//    public void canCreateContact() {
+//        var contact = new ContactData()
+//                .withName(CommonFunctions.randomString(10), CommonFunctions.randomString(10))
+//                .withPhoto(CommonFunctions.randomFile("src/test/resources/images"));
+//        app.contacts().createContact(contact);
+//    }
 
 }

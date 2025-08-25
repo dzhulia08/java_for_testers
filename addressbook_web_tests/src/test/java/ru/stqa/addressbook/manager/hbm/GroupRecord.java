@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Date;
-
 @Entity
 @Table(name="group_list")
 public class GroupRecord {
@@ -20,7 +18,7 @@ public class GroupRecord {
     @Column(name = "group_footer")
     public String footer;
 
-    public Date deprecated = new Date();
+    public String deprecated = "2025-08-25 22:40:39";
 
     public GroupRecord() {
     }
