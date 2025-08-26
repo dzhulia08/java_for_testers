@@ -136,4 +136,36 @@ public class ContactHelper extends HelperBase {
         }
         return contracts;
     }
+
+    public void addContactInGroup(ContactData contact, GroupData group) {
+        openContactsPage();
+        selectContact(contact);
+        selectGroupInList(group);
+        addSelectedContactInGroup();
+//        returnToContactPage();
+    }
+
+    private void selectGroupInList(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
+    }
+
+    private void addSelectedContactInGroup() {
+        click(By.xpath("//input[@value='Add to']"));
+    }
+
+    public void deleteContactFromGroup(ContactData contact, GroupData group) {
+        openContactsPage();
+        selectGroupInTableList(group);
+        selectContact(contact);
+        removeSelectedContactFromGroup();
+//        returnToContactPage();
+    }
+
+    private void selectGroupInTableList(GroupData group) {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
+    }
+
+    private void removeSelectedContactFromGroup() {
+        click(By.xpath("//input[@name='remove']"));
+    }
 }
