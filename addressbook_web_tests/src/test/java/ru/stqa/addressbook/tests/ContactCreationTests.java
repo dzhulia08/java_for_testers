@@ -112,6 +112,41 @@ public class ContactCreationTests extends TestBase {
         }
         var contact = app.hbm().getContactList().get(0);
 
+//        int countContactsInGroup = app.hbm().getContactsInGroup(group).size();
+//        if (countContactsInGroup != 0) {
+//            var contactsInGroup = app.hbm().getContactsInGroup(group);
+//            var allContacts = app.hbm().getContactList();
+//            int i = -1;
+//            for (var all : allContacts) {
+//                for (var inGroup : contactsInGroup) {
+//                    if (!all.id().equals(inGroup.id())) {
+//                        i = Integer.parseInt(inGroup.id());
+//                        contact = app.hbm().getContactList().get(i);
+//                    }
+//                }
+//            }
+
+        int countContactsInGroup = app.hbm().getContactsInGroup(group).size();
+        if (countContactsInGroup != 0) {
+            var contactsInGroup = app.hbm().getContactsInGroup(group);
+            ArrayList<String> allContacts = new ArrayList<String>();
+            allContacts.add(app.hbm().getContactList().toString());
+            int i = -1;
+            for (var inGroup : contactsInGroup) {
+                 if (!allContacts.contains(inGroup.id())) {
+                    i = Integer.parseInt(inGroup.id());
+                    contact = app.hbm().getContactList().get(i);
+                 }
+            }
+            if (i == -1) {
+                app.contacts().createContact(new ContactData("", "Иван", "Иванович", "Иванов", "Адрес",
+                                "src/test/resources/images/avatar.png", "89091110998", "4956768898", "4956768800",
+                                "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
+                int count = app.hbm().getContactList().size();
+                contact = app.hbm().getContactList().get(count);
+            }
+        }
+
         var oldRelated = app.hbm().getContactsInGroup(group);
         app.contacts().addContactInGroup(contact, group);
         var newRelated = app.hbm().getContactsInGroup(group);
