@@ -47,7 +47,7 @@ public class ContactCreationTests extends TestBase {
                 CommonFunctions.randomString(10), CommonFunctions.randomString(4),
                 CommonFunctions.randomString(5), "src/test/resources/images/avatar.png",
                 CommonFunctions.randomPhone(), CommonFunctions.randomPhone(),
-                CommonFunctions.randomPhone(), CommonFunctions.randomEmail(5),
+                CommonFunctions.randomPhone(), "", CommonFunctions.randomEmail(5),
                 CommonFunctions.randomEmail(6), CommonFunctions.randomEmail(7)));
     }
 

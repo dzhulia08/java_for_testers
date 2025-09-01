@@ -96,9 +96,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("middlename"), contact.middleName());
         type(By.name("lastname"), contact.lastName());
         type(By.name("address"), contact.address());
-        type(By.name("home"), contact.phone1());
-        type(By.name("mobile"), contact.phone2());
-        type(By.name("work"), contact.phone3());
+        type(By.name("home"), contact.home());
+        type(By.name("mobile"), contact.mobile());
+        type(By.name("work"), contact.work());
         type(By.name("email"), contact.email1());
         type(By.name("email2"), contact.email2());
         type(By.name("email3"), contact.email3());
@@ -159,6 +159,11 @@ public class ContactHelper extends HelperBase {
 
     private void removeSelectedContactFromGroup() {
         click(By.xpath("//input[@name='remove']"));
+    }
+
+    public String getPhones(ContactData contact) {
+        return manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[6]", contact.id()))).getText();
     }
 
 }

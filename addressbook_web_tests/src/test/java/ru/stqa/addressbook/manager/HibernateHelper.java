@@ -8,7 +8,6 @@ import ru.stqa.addressbook.manager.hbm.GroupRecord;
 import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,7 @@ public class HibernateHelper extends HelperBase {
         return new ContactData("" + record.id, record.firstname, record.middlename,
                 record.lastname, record.address, "src/test/resources/images/avatar.png",
                 record.home, record.mobile, record.work,
-                record.email, record.email2, record.email3);
+                record.phone2, record.email, record.email2, record.email3);
     }
 
     private static GroupRecord convert(GroupData data) {
@@ -63,8 +62,8 @@ public class HibernateHelper extends HelperBase {
             id = "0";
         }
         return new ContactRecord(Integer.parseInt(id), data.firstName(), data.middleName(),
-                data.lastName(), data.address(), data.phone1(), data.phone2(),
-                data.phone3(), data.email1(), data.email2(), data.email3());
+                data.lastName(), data.address(), data.home(), data.mobile(),
+                data.work(), data.secondary(), data.email1(), data.email2(), data.email3());
     }
 
     public List<GroupData> getGroupList() {

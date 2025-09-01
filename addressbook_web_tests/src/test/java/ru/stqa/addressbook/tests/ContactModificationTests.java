@@ -16,7 +16,7 @@ public class ContactModificationTests extends TestBase {
         if (app.hbm().getContactCount() == 0){
             app.contacts().createContact(new ContactData("", "Иван", "Иванович", "Иванов", "Адрес",
                     "src/test/resources/images/avatar.png", "89091110998", "4956768898", "4956768800",
-                    "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
+                    "", "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
         }
         var oldContacts = app.hbm().getContactList();
         var rnd = new Random();

@@ -11,7 +11,6 @@ import ru.stqa.addressbook.model.ContactData;
 import ru.stqa.addressbook.model.GroupData;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,7 +74,7 @@ public class Generator {
                 CommonFunctions.randomPhone(),
                 CommonFunctions.randomPhone(),
                 CommonFunctions.randomPhone(),
-                CommonFunctions.randomEmail(5),
+                "", CommonFunctions.randomEmail(5),
                 CommonFunctions.randomEmail(5),
                 CommonFunctions.randomEmail(5)));
     }
