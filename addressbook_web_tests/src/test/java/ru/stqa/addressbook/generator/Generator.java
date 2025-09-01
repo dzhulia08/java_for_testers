@@ -12,6 +12,9 @@ import ru.stqa.addressbook.model.GroupData;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Generator {
 
@@ -52,33 +55,29 @@ public class Generator {
     }
 
     private Object generateGroups() {
-        var result = new ArrayList<GroupData>();
-        for (int i = 0; i < count; i++) {
-            result.add(new GroupData()
-                    .withName(CommonFunctions.randomString(i * 10))
-                    .withHeader(CommonFunctions.randomString(i * 10))
-                    .withFooter(CommonFunctions.randomString(i * 10)));
-        }
-        return result;
+        return generateDate( () -> new GroupData()
+                .withName(CommonFunctions.randomString(8))
+                .withHeader(CommonFunctions.randomString(9))
+                .withFooter(CommonFunctions.randomString(10)));
+    }
+
+    private Object generateDate(Supplier<Object> dataSupplier) {
+        return Stream.generate(dataSupplier).limit(count).collect(Collectors.toList());
     }
 
     private Object generateContacts() {
-        var result = new ArrayList<ContactData>();
-        for (int i = 0; i < count; i++) {
-            result.add(new ContactData("",
-                    CommonFunctions.randomString(i * 5),
-                    CommonFunctions.randomString(i * 5),
-                    CommonFunctions.randomString(i * 5),
-                    CommonFunctions.randomString(i * 5),
-                    "src/test/resources/images/avatar.png",
-                    CommonFunctions.randomPhone(),
-                    CommonFunctions.randomPhone(),
-                    CommonFunctions.randomPhone(),
-                    CommonFunctions.randomEmail(i),
-                    CommonFunctions.randomEmail(i),
-                    CommonFunctions.randomEmail(i)));
-        }
-        return result;
+        return generateDate( () -> new ContactData("",
+                CommonFunctions.randomString(5),
+                CommonFunctions.randomString(5),
+                CommonFunctions.randomString(5),
+                CommonFunctions.randomString(5),
+                "src/test/resources/images/avatar.png",
+                CommonFunctions.randomPhone(),
+                CommonFunctions.randomPhone(),
+                CommonFunctions.randomPhone(),
+                CommonFunctions.randomEmail(5),
+                CommonFunctions.randomEmail(5),
+                CommonFunctions.randomEmail(5)));
     }
 
     private void save(Object data) throws IOException {
