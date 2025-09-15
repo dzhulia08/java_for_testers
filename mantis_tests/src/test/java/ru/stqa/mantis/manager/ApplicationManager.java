@@ -14,6 +14,7 @@ public class ApplicationManager {
     private SessionHelper sessionHelper;
     private HttpSessionHelper httpSessionHelper;
     private JamesCliHelper jamesCliHelper;
+    private JamesApiHelper jamesApiHelper;
     private MailHelper mailHelper;
     private UserHelper userHelper;
 
@@ -65,6 +66,13 @@ public class ApplicationManager {
             jamesCliHelper = new JamesCliHelper(this);
         }
         return jamesCliHelper;
+    }
+
+    public JamesApiHelper jamesApi() {
+        if (jamesApiHelper == null) {
+            jamesApiHelper = new JamesApiHelper(this);
+        }
+        return jamesApiHelper;
     }
 
     public UserHelper user() {

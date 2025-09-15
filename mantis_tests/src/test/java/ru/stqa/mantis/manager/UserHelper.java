@@ -8,7 +8,7 @@ public class UserHelper extends HelperBase {
         super(manager);
     }
 
-    public void creationUser(String userName) {
+    public void startCreation(String userName) {
         click(By.xpath("//a[@class='back-to-login-link pull-left']"));
         type(By.name("username"), userName);
         type(By.xpath("//input[@id='email-field']"), String.format("%s@localhost", userName));
