@@ -2,9 +2,7 @@ package ru.stqa.mantis.manager;
 
 import org.openqa.selenium.io.CircularOutputStream;
 import org.openqa.selenium.os.CommandLine;
-import org.openqa.selenium.os.ExternalProcess;
 
-import java.time.Duration;
 
 public class JamesCliHelper extends HelperBase {
 
