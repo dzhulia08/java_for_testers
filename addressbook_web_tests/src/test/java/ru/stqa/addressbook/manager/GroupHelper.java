@@ -15,12 +15,14 @@ public class GroupHelper extends HelperBase {
         super(manager);
     }
 
+    @Step
     public void openGroupsPage() {
         if (! manager.isElementPresent(By.name("new"))) {
             click(By.linkText("groups"));
         }
     }
 
+    @Step
     public void createGroup(GroupData group) {
         openGroupsPage();
         initGroupCreation();
@@ -37,6 +39,7 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
+    @Step
     public void modifyGroup(GroupData group, GroupData modifiedGroup) {
         openGroupsPage();
         selectGroup(group);
@@ -46,57 +49,69 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
+    @Step
     private void submitGroupCreation() {
         click(By.name("submit"));
     }
 
+    @Step
     private void initGroupCreation() {
         click(By.name("new"));
     }
 
+    @Step
     private void removeSelectedGroups() {
         click(By.name("delete"));
     }
 
+    @Step
     private void returnToGroupPage() {
         click(By.linkText("group page"));
     }
 
+    @Step
     private void submitGroupModification() {
         click(By.name("update"));
     }
 
+    @Step
     private void fillGroupForm(GroupData group) {
         type(By.name("group_name"), group.name());
         type(By.name("group_header"), group.header());
         type(By.name("group_footer"), group.footer());
     }
 
+    @Step
     private void initGroupModification() {
         click(By.name("edit"));
     }
 
+    @Step
     private void selectGroup(GroupData group) {
         click(By.cssSelector(String.format("input[value='%s']", group.id())));
     }
 
+    @Step
     public int getCount() {
         openGroupsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
+    @Step
     public void removeAllGroups() {
         openGroupsPage();
         selectAllGroups();
         removeSelectedGroups();
     }
 
+    @Step
     private void selectAllGroups() {
         manager.driver
                 .findElements(By.name("selected[]"))
                 .forEach(WebElement::click);
     }
 
+    @Step
     public List<GroupData> getList() {
         openGroupsPage();
         var spans = manager.driver.findElements(By.cssSelector("span.group"));

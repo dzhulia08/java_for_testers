@@ -30,18 +30,22 @@ public class HibernateHelper extends HelperBase {
                 .buildSessionFactory();
     }
 
+    @Step
     static List<GroupData> convertGroupList(List<GroupRecord> records) {
         return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
+    @Step
     static List<ContactData> convertContactList(List<ContactRecord> records) {
         return records.stream().map(HibernateHelper::convert).collect(Collectors.toList());
     }
 
+    @Step
     private static GroupData convert(GroupRecord record) {
         return new GroupData("" + record.id, record.name, record.header, record.footer);
     }
 
+    @Step
     private static ContactData convert(ContactRecord record) {
         return new ContactData("" + record.id, record.firstname, record.middlename,
                 record.lastname, record.address, "src/test/resources/images/avatar.png",
@@ -49,6 +53,7 @@ public class HibernateHelper extends HelperBase {
                 record.phone2, record.email, record.email2, record.email3);
     }
 
+    @Step
     private static GroupRecord convert(GroupData data) {
         var id = data.id();
         if ("".equals(id)) {
@@ -57,6 +62,7 @@ public class HibernateHelper extends HelperBase {
         return new GroupRecord(Integer.parseInt(id), data.name(), data.header(), data.footer());
     }
 
+    @Step
     private static ContactRecord convert(ContactData data) {
         var id = data.id();
         if ("".equals(id)) {
@@ -74,18 +80,21 @@ public class HibernateHelper extends HelperBase {
         }));
     }
 
+    @Step
     public List<ContactData> getContactList() {
         return convertContactList(sessionFactory.fromSession(session -> {
             return session.createQuery("from ContactRecord", ContactRecord.class).list();
         }));
     }
 
+    @Step
     public long getGroupCount() {
         return sessionFactory.fromSession(session -> {
             return session.createQuery("select count (*) from GroupRecord", Long.class).getSingleResult();
         });
     }
 
+    @Step
     public long getContactCount() {
         return sessionFactory.fromSession(session -> {
             return session.createQuery("select count (*) from ContactRecord", Long.class).getSingleResult();
@@ -101,6 +110,7 @@ public class HibernateHelper extends HelperBase {
         });
     }
 
+    @Step
     public void createContact(ContactData contactData) {
         sessionFactory.inSession(session -> {
             session.getTransaction().begin();
@@ -109,6 +119,7 @@ public class HibernateHelper extends HelperBase {
         });
     }
 
+    @Step
     public List<ContactData> getContactsInGroup(GroupData group) {
         return sessionFactory.fromSession(session -> {
             return convertContactList(session.get(GroupRecord.class, group.id()).contacts);

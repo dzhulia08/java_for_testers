@@ -2,6 +2,7 @@ package ru.stqa.addressbook.tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.Allure;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,23 +21,23 @@ import java.util.stream.Stream;
 
 public class GroupCreationTests extends TestBase {
 
-    public static List<GroupData> groupProvider() throws IOException {
-        var result = new ArrayList<GroupData>();
-        var json = "";
-        try (var reader = new FileReader("groups.json");
-             var breader = new BufferedReader(reader)
-        ) {
-            var line = breader.readLine();
-            while (line != null) {
-                json = json + line;
-                line = breader.readLine();
-            }
-        }
-        ObjectMapper mapper = new ObjectMapper();
-        var value = mapper.readValue(json, new TypeReference<List<GroupData>>() {});
-        result.addAll(value);
-        return result;
-    }
+//    public static List<GroupData> groupProvider() throws IOException {
+//        var result = new ArrayList<GroupData>();
+//        var json = "";
+//        try (var reader = new FileReader("groups.json");
+//             var breader = new BufferedReader(reader)
+//        ) {
+//            var line = breader.readLine();
+//            while (line != null) {
+//                json = json + line;
+//                line = breader.readLine();
+//            }
+//        }
+//        ObjectMapper mapper = new ObjectMapper();
+//        var value = mapper.readValue(json, new TypeReference<List<GroupData>>() {});
+//        result.addAll(value);
+//        return result;
+//    }
 
     public static Stream<GroupData> randomGroups() {
         Supplier<GroupData> randomGroup = () -> new GroupData()
@@ -59,8 +60,9 @@ public class GroupCreationTests extends TestBase {
         var expectedList = new ArrayList<>(oldGroups);
         expectedList.add(group.withId(newId));
 
-        Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
-
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals(Set.copyOf(newGroups), Set.copyOf(expectedList));
+        });
     }
 
 
@@ -76,7 +78,9 @@ public class GroupCreationTests extends TestBase {
         var oldGroups = app.groups().getList();
         app.groups().createGroup(group);
         var newGroups = app.groups().getList();
-        Assertions.assertEquals(newGroups, oldGroups);
+        Allure.step("Validating results", step -> {
+            Assertions.assertEquals(newGroups, oldGroups);
+        });
     }
 
 }

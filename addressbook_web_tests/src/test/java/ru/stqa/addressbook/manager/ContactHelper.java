@@ -1,5 +1,6 @@
 package ru.stqa.addressbook.manager;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import ru.stqa.addressbook.model.ContactData;
@@ -18,17 +19,20 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
+    @Step
     public void openContactsPage() {
         if (! manager.isElementPresent(By.id("search_count"))) {
             click(By.linkText("home"));
         }
     }
 
+    @Step
     public boolean isContactPresent() {
         openContactsPage();
         return manager.isElementPresent(By.name("selected[]"));
     }
 
+    @Step
     public void createContact(ContactData contact) {
         openContactsPage();
         initContactCreation();
@@ -37,6 +41,7 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
+    @Step
     public void createContact(ContactData contact, GroupData group) {
         openContactsPage();
         initContactCreation();
@@ -46,6 +51,7 @@ public class ContactHelper extends HelperBase {
         returnToContactPage();
     }
 
+    @Step
     private void selectGroup(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
@@ -57,43 +63,51 @@ public class ContactHelper extends HelperBase {
 //        closeAlertAfterRemoveContact();
     }
 
+    @Step
     public void modifyContact(ContactData contact, ContactData modifiedContact) {
         openContactsPage();
-//        selectContact(contact);
         initContactModification(contact);
         fillContactForm(modifiedContact);
         submitContactModification();
         returnToContactPage();
     }
 
+    @Step
     private void initContactModification(ContactData contact) {
         click(By.xpath(String.format("//a[contains(@href, \"edit.php?id=%s\")]", contact.id())));
     }
 
+    @Step
     private void submitContactModification() {
         click(By.name("update"));
     }
 
+    @Step
     private void closeAlertAfterRemoveContact() {
         closeAlert();
     }
 
+    @Step
     private void submitContactCreation() {
         click(By.name("submit"));
     }
 
+    @Step
     private void initContactCreation() {
         click(By.linkText("add new"));
     }
 
+    @Step
     private void removeSelectedContact() {
         click(By.xpath("//input[@value='Delete']"));
     }
 
+    @Step
     private void returnToContactPage() {
         click(By.linkText("home"));
     }
 
+    @Step
     private void fillContactForm(ContactData contact) {
         type(By.name("firstname"), contact.firstName());
         type(By.name("middlename"), contact.middleName());
@@ -108,16 +122,18 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contact.photo());
     }
 
+    @Step
     private void selectContact(ContactData contact) {
-//        click(By.name("selected[]"));
         click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
+    @Step
     public int getCount() {
         openContactsPage();
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
+    @Step
     public List<ContactData> getList() {
         openContactsPage();
         var contracts = new ArrayList<ContactData>();
@@ -132,6 +148,7 @@ public class ContactHelper extends HelperBase {
         return contracts;
     }
 
+    @Step
     public void addContactInGroup(ContactData contact, GroupData group) {
         openContactsPage();
         selectContact(contact);
@@ -140,14 +157,17 @@ public class ContactHelper extends HelperBase {
 //        returnToContactPage();
     }
 
+    @Step
     private void selectGroupInList(GroupData group) {
         new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
     }
 
+    @Step
     private void addSelectedContactInGroup() {
         click(By.xpath("//input[@value='Add to']"));
     }
 
+    @Step
     public void deleteContactFromGroup(ContactData contact, GroupData group) {
         openContactsPage();
         selectGroupInTableList(group);
@@ -156,19 +176,23 @@ public class ContactHelper extends HelperBase {
 //        returnToContactPage();
     }
 
+    @Step
     private void selectGroupInTableList(GroupData group) {
         new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
     }
 
+    @Step
     private void removeSelectedContactFromGroup() {
         click(By.xpath("//input[@name='remove']"));
     }
 
+    @Step
     public String getPhones(ContactData contact) {
         return manager.driver.findElement(By.xpath(
                 String.format("//input[@id='%s']/../../td[6]", contact.id()))).getText();
     }
 
+    @Step
     public Map<String, String> getPhones() {
         var result = new HashMap<String, String>();
         List<WebElement> rows = manager.driver.findElements(By.name("entry"));
@@ -180,6 +204,7 @@ public class ContactHelper extends HelperBase {
         return result;
     }
 
+    @Step
     public Object getAddress() {
         var result = new HashMap<String, String>();
         List<WebElement> rows = manager.driver.findElements(By.name("entry"));
@@ -191,6 +216,7 @@ public class ContactHelper extends HelperBase {
         return result;
     }
 
+    @Step
     public Object getEmails() {
         var result = new HashMap<String, String>();
         List<WebElement> rows = manager.driver.findElements(By.name("entry"));

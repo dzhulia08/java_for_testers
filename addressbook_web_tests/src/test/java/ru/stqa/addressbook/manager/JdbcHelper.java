@@ -1,5 +1,6 @@
 package ru.stqa.addressbook.manager;
 
+import io.qameta.allure.Step;
 import ru.stqa.addressbook.model.GroupData;
 
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ public class JdbcHelper extends HelperBase {
         super(manager);
     }
 
+    @Step
     public List<GroupData> getGroupList() {
         var groups = new ArrayList<GroupData>();
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
@@ -32,6 +34,7 @@ public class JdbcHelper extends HelperBase {
         return groups;
     }
 
+    @Step
     public void checkConsistency() {
         try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook", "root", "");
              var statement = conn.createStatement();
