@@ -17,7 +17,7 @@ public class TestBase {
     protected static ContactData getContactForAddedToGroup(GroupData group) {
         ContactData contact = null;
         if (app.hbm().getContactCount() == 0){
-            app.contacts().createContact(new ContactData("", "Иван", "Иванович", "Иванов", "Адрес",
+            app.contacts().createContact(new ContactData("", "Ivan", "Ivanovich", "Ivanov", "Address",
                     "src/test/resources/images/avatar.png", "89091110998", "4956768898", "4956768800",
                     "", "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
             contact = app.hbm().getContactList().get(0);
@@ -26,7 +26,7 @@ public class TestBase {
             if (countContactsInGroup == 0) {
                 contact = app.hbm().getContactList().get(0);
             } else {
-                app.contacts().createContact(new ContactData("", "Иван", "Иванович", "Иванов", "Адрес",
+                app.contacts().createContact(new ContactData("", "Ivan", "Ivanovich", "Ivanov", "Address",
                         "src/test/resources/images/avatar.png", "89091110998", "4956768898", "4956768800",
                         "", "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
                 int count = app.hbm().getContactList().size();
