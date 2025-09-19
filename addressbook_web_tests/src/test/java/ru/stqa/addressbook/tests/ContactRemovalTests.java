@@ -13,9 +13,8 @@ public class ContactRemovalTests extends TestBase {
 
     @Test
     public void canRemoveContact() {
-//        if (!app.hbm().isContactPresent()){
         if (app.hbm().getContactCount() == 0){
-            app.hbm().createContact(new ContactData("", "Иван", "Иванович", "Иванов", "Адрес 1",
+            app.hbm().createContact(new ContactData("", "Ivan", "Ivanovich", "Ivanov", "Address 1",
                     "src/test/resources/images/avatar.png", "89091110998", "4956768898", "4956768800",
                     "", "test@rt.ru", "test2@rt.ru", "test3@rt.ru"));
         }
